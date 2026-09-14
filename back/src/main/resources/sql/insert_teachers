@@ -1,0 +1,2 @@
+insert into teachers (first_name, last_name) values ('firstName_teach1', 'lastName_teach1');
+insert into teachers (first_name, last_name) values ('firstName_teach2', 'lastName_teach2');
