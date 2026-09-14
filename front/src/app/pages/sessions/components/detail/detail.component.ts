@@ -50,7 +50,7 @@ export class DetailComponent implements OnInit {
   }
 
   public delete(): void {
-    this.sessionApiService.delete(this.sessionId).subscribe((_: any) => {
+    this.sessionApiService.delete(this.sessionId).subscribe(() => {
       this.matSnackBar.open('Session deleted !', 'Close', { duration: 3000 });
       this.router.navigate(['sessions']);
     });
