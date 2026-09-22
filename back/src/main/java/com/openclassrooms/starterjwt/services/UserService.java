@@ -23,8 +23,8 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public User findById(Long id) {
-        return this.userRepository.findById(id).orElse(null);
+    public Optional<User> findById(Long id) {
+        return this.userRepository.findById(id);
     }
 
     public Optional<User> findByEmail(String email) {

@@ -30,30 +30,25 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id) {
-        User user = this.userService.findById(Long.valueOf(id));
-
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok().body(this.userMapper.toDto(user));
+        return userService.findById(Long.valueOf(id))
+                .map(user -> ResponseEntity.ok().body(userMapper.toDto(user)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> save(@PathVariable("id") String id) {
-        User user = this.userService.findById(Long.valueOf(id));
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+        return userService.findById(Long.valueOf(id))
+                .map(user -> {
+                    UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                            .getAuthentication().getPrincipal();
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
+                    if (!Objects.equals(userDetails.getUsername(), user.getEmail())) {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                    }
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (!Objects.equals(userDetails.getUsername(), user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        this.userService.delete(Long.parseLong(id));
-        return ResponseEntity.ok().build();
+                    userService.delete(user.getId());
+                    return ResponseEntity.ok().build();
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
