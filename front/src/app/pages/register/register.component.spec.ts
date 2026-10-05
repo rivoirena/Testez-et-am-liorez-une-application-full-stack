@@ -124,7 +124,7 @@ describe('RegisterComponent', () => {
 
     it('should call submit() when form is submitted', () => {
       const submitSpy = jest.spyOn(component, 'submit');
-      component.form.setValue(mockRegisterRequest);
+      fillForm(mockRegisterRequest);
       fixture.detectChanges();
 
       const form = fixture.debugElement.query(By.css('form'));
