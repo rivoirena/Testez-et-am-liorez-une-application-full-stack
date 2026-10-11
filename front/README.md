@@ -10,7 +10,7 @@ Git clone:
 
 Go inside folder:
 
-> cd yoga
+> cd front
 
 Install dependencies:
 
@@ -18,7 +18,7 @@ Install dependencies:
 
 Launch Front-end:
 
-> npm run start;
+> npm run start
 
 
 ### Test
