@@ -42,12 +42,16 @@ Report is available here:
 
 > front/coverage/lcov-report/index.html
 
-#### Unitary test
+#### Unitary and integration test
 
 Launching test:
 
-> npm run test
+> npm test
 
 for following change:
 
 > npm run test:watch
+
+Generate coverage report :
+
+npm test -- --coverage
