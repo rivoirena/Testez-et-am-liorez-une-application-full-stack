@@ -2,6 +2,11 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.16.
 
+## Prerequisites
+
+    -> Node.js 18+
+    -> npm 9+
+
 ## Start the project
 
 Git clone:
